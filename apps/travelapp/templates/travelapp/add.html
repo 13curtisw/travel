@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Add a new Trip</title>
+	</head>
+	<body>
+		<p><a href="{% url 'travel_home' %}">Home</a> <a href="{% url 'travel_logout' %}">Logout</a></p>
+		<h1>Add a Trip</h1>
+		{% for error in errors%}
+			<p>{{error}}</p>
+		{% endfor %}
+		<form action="{% url 'travel_create' %}" method="post">
+		{% csrf_token %}
+			<p>Destination: <input type="text" name="destination"></p>
+			<p>Description: <input type="text" name="plan"></p>
+			<p>Travel Date From: <input type="date" name="startdate"></p>
+			<p>Travel Date To: <input type="date" name="enddate"></p>
+			<p><input type="submit" value="Add"></p>
+		</form>
+	</body>
+</html>

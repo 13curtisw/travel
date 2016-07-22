@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Home</title>
+	</head>
+	<body>
+		<p><a href="{% url 'travel_logout' %}">Logout</a></p>
+		<h1>Hello, {{user.name}}!</h1>
+		<h3>Your Trip Schedules</h3>
+		<table>
+			<thead>
+				<tr>
+					<td>Destination</td>
+					<td>Travel Start Date</td>
+					<td>Travel End Date</td>
+					<td>Plan</td>
+				</tr>
+			</thead>
+			<tbody>
+				{% for trip in usertrips %}
+				<tr>
+					<td><a href="{% url 'travel_show' id=trip.id %}">{{trip.destination}}</a></td>
+					<td>{{trip.startdate}}</td>
+					<td>{{trip.enddate}}</td>
+					<td>{{trip.plan}}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<h3>Other User's Travel Plans</h3>
+		<table>
+			<thead>
+				<tr>
+					<td>Name</td>
+					<td>Destination</td>
+					<td>Travel Start Date</td>
+					<td>Travel End Date</td>
+					<td>Do You Want to Join?</td>
+				</tr>
+			</thead>
+			<tbody>
+				{% for trip in othertrips %}
+				<tr>
+					<td>{{trip.users.all.0.name}}</td>
+					<td><a href="{% url 'travel_show' id=trip.id %}">{{trip.destination}}</a></td>
+					<td>{{trip.startdate}}</td>
+					<td>{{trip.enddate}}</td>
+					<td><a href="{% url 'travel_update' id=trip.id%}">Join</a></td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<p><a href="{% url 'travel_add' %}">Add Travel Plan</a></p>
+	</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Travel Sign-In</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	</head>
+	<body>
+		<div class="container-fluid">
+			<h1>Welcome!</h1>
+			<h3>Register</h3>
+			{% for error in regerrors%}
+				<p>{{error}}</p>
+			{% endfor %}
+			<form action="{% url 'travel_register' %}" method="post">
+			{% csrf_token %}
+				<p>Name: <input type="text" name="name"></p>
+				<p>Username: <input type="text" name="username"></p>
+				<p>Password: <input type="password" name="password"></p>
+				<p><small>*Password should be at least 8 characters</small></p>
+				<p>Confirm PW: <input type="password" name="confirm_password"></p>
+				<p><input type="submit" value="Register"></p>
+			</form>
+			<h3>Login</h3>
+			{% for error in logerrors%}
+				<p>{{error}}</p>
+			{% endfor %}
+			<form action="{% url 'travel_login' %}" method="post">
+			{% csrf_token %}
+				<p>Username: <input type="text" name="username"></p>
+				<p>Password: <input type="password" name="password"></p>
+				<p><input type="submit" value="Login"></p>
+			</form>
+		</div>
+	</body>
+</html>
